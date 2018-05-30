@@ -13,9 +13,11 @@ import android.util.Log
 import android.widget.TextView
 import java.util.*
 import kotlin.math.log
+import android.content.Intent
+import android.widget.Button
+import kotlinx.android.synthetic.main.activity_main.*
 
-
-class MainActivity() : AppCompatActivity(), Parcelable {
+/*class MainActivity() : AppCompatActivity(), Parcelable {
 
     var timeStamp: Number = Date().getTime();
     internal lateinit var ProximitySensor: TextView
@@ -82,4 +84,30 @@ class MainActivity() : AppCompatActivity(), Parcelable {
             return arrayOfNulls(size)
         }
     }
+}*/
+
+private val CODE_MY_ACTIVITY = 101
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val searchIntent = Intent(this, SearchActivity::class.java)
+        val favoritesIntent = Intent(this, FavoritesActivity::class.java)
+
+        simple_search.setOnClickListener {
+            startActivityForResult(searchIntent, CODE_MY_ACTIVITY)
+        }
+
+        advanced_search.setOnClickListener {
+            startActivityForResult(searchIntent, CODE_MY_ACTIVITY)
+        }
+
+        favorites.setOnClickListener {
+            startActivityForResult(favoritesIntent, CODE_MY_ACTIVITY)
+        }
+    }
 }
+

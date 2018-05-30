@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/proximitySensor"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/data"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="50dp" />
+        <Button
+            android:id="@+id/simple_search"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Recherche simple"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="27dp" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/advanced_search"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Recherche avancée"
+            tools:layout_editor_absoluteX="107dp"
+            tools:layout_editor_absoluteY="92dp" />
+
+        <Button
+            android:id="@+id/favorites"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Favoris"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="157dp" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
