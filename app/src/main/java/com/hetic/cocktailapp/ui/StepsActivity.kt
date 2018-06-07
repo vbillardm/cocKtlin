@@ -37,6 +37,7 @@ class StepsActivity() : AppCompatActivity(), StepFragment.Listener, Parcelable {
     internal var myProximitySensor: Sensor? = null
     private var currentRunnable: Runnable? = null
     private var IS_FIRST : Boolean = false
+    private var IS_SECOND : Boolean = false
     var currentTimeStamp = 0L
     var currentTimeStamp2 = 0L
 
@@ -145,9 +146,13 @@ class StepsActivity() : AppCompatActivity(), StepFragment.Listener, Parcelable {
 
         override fun onSensorChanged(event: SensorEvent) {
             if (event.sensor.type == Sensor.TYPE_PROXIMITY) {
-                Log.d("Event",event.values[0].toString())
-                if (event.values[0] <= 10 && event.values[0] != oldSensorValue.toFloat()) {
 
+                if (event.values[0] <= 10 && event.values[0] != oldSensorValue.toFloat()) {
+                    if(IS_FIRST === false && IS_SECOND === false){
+                        IS_FIRST = true
+                    }else if( IS_FIRST === true && IS_SECOND === false ) {
+                        IS_SECOND = true
+                    }else{
                     if (event.values[0] != 0.0f) { oldSensorValue = event.values[0] }
                     if (currentTimeStamp != 0L) { currentTimeStamp2 = Date().time }
 
@@ -171,7 +176,7 @@ class StepsActivity() : AppCompatActivity(), StepFragment.Listener, Parcelable {
                         Handler().postDelayed(currentRunnable, 1500)
                     }
                 }
-
+                }
             }
         }
 
