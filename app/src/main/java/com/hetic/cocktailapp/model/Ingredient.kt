@@ -7,3 +7,8 @@ data class Ingredient(
         var name: String,
         var quantity: Int,
         var unity: String = "") : Serializable
+{
+    fun getLabel() : String{
+        return "${this.quantity} ${this.unity}"
+    }
+}

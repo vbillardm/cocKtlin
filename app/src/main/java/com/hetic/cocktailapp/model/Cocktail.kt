@@ -11,6 +11,9 @@ data class Cocktail  (
         val url: String,
         var globalRateVotes : String,
         var GlobalRate : Float,
+        val difficultyRate: Int,
+        val speedRate: Int,
+        val PriceRate : Int,
         var tags : ArrayList<Tag> = arrayListOf()) : Serializable {
 
     fun getRating() : Float  {
@@ -18,16 +21,16 @@ data class Cocktail  (
         return if (nbRates == 0F) 0F else GlobalRate/nbRates
     }
 
-    fun getTimeRating() : Float{
-        return 0F
+    fun getTimeRating() : Int{
+        return speedRate
     }
 
-    fun getDifficultyRating() : Float{
-        return 0F
+    fun getDifficultyRating() : Int{
+        return difficultyRate
     }
 
-    fun getPriceRating() : Float{
-        return 0F
+    fun getPriceRating() : Int{
+        return PriceRate
     }
 
     fun getFilteredTags(i : Int) : List<Tag> {

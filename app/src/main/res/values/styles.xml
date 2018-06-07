@@ -52,6 +52,12 @@
         <item name="android:progressDrawable">@drawable/progress_bar</item>
     </style>
 
+    <style name="textProgress" parent="textStyle">
+        <item name="android:textSize">6sp</item>
+        <item name="android:textColor">@color/grayDark</item>
+        <item name="android:fontFamily">@font/avenir_heavy</item>
+    </style>
+
     <style name="divider" parent="CocktailTheme">
         <item name="android:background">@color/dividerBg</item>
         <item name="android:layout_marginTop">@dimen/padding_md</item>
@@ -104,6 +110,11 @@
         <item name="android:fontFamily">avenir_black</item>
     </style>
 
+    <style name="cardWhiteTag" parent="cardTag">
+        <item name="android:textColor">@color/grayLighter</item>
+        <item name="android:background">@drawable/tag_border_white</item>
+    </style>
+
     <style name="cardRatingText" parent="@android:style/TextAppearance">
         <item name="android:textSize">@dimen/cardRatingTextFS</item>
         <item name="android:textColor">@color/gray</item>
@@ -115,13 +126,14 @@
         <item name="cardElevation">@dimen/cardElevation</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardPreventCornerOverlap">true</item>
-        <item name="cardBackgroundColor">@color/grayLighter</item>
+        <item name="cardBackgroundColor">@color/grayLight</item>
     </style>
 
     <style name="cardHContainer" parent="@android:style/TextAppearance">
         <item name="android:paddingTop">@dimen/cardPaddingTop</item>
         <item name="android:paddingBottom">@dimen/cardPaddingBottom</item>
         <item name="android:paddingHorizontal">@dimen/cardPaddingHorizontal</item>
+        <item name="android:background">@color/grayLighter</item>
     </style>
 
     <style name="cardHSize" parent="CocktailTheme">
@@ -138,14 +150,11 @@
     </style>
 
     <style name="cardDetailStyle" parent="CardView">
-        <item name="cardCornerRadius">8dp</item>
-        <item name="cardElevation">5dp</item>
-        <item name="cardUseCompatPadding">true</item>
-        <item name="cardPreventCornerOverlap">true</item>
-        <item name="cardBackgroundColor">@color/grayLighter</item>
+        <item name="android:background">@drawable/card_rounded</item>
         <item name="android:layout_marginBottom">@dimen/padding_md</item>
         <item name="android:layout_marginHorizontal">@dimen/padding_sm</item>
-        <item name="android:padding">@dimen/padding_m</item>
+        <item name="android:paddingVertical">@dimen/padding_s</item>
+        <item name="android:paddingHorizontal">@dimen/padding_sm</item>
     </style>
 
     <style name="cardDetailRatingText" parent="textStyle">

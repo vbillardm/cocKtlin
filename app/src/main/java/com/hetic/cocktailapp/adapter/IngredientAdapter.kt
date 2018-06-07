@@ -21,7 +21,7 @@ class IngredientAdapter(val listener: (Ingredient) -> Unit) : RecyclerView.Adapt
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: Ingredient, listener: (Ingredient) -> Unit) = with(itemView) {
-            name.text = item.name
+            name.text = item.getLabel()
         }
     }
 

@@ -96,7 +96,7 @@ class DetailIntroFragment : Fragment() {
 
         //SIMPLE
         view.findViewById<RatingBar>(R.id.rating)?.rating = globalRate.getRating()
-        view.findViewById<TextView>(R.id.rating_text)?.text = globalRate.getRatingString()
+        view.findViewById<TextView>(R.id.rating_text)?.text = "%.1f".format(globalRate.getRating())
 
         //ADVANCED RATING
         val shakeRatingBar = view.findViewById<RatingBar>(R.id.rating_shake)
