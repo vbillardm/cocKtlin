@@ -5,24 +5,27 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
+import android.os.*
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.TextView
 import java.util.*
+import kotlin.concurrent.timer
 import kotlin.math.log
 
 
 class MainActivity() : AppCompatActivity(), Parcelable {
 
     var timeStamp: Long = Date().getTime();
+    var currentTimeStamp = 0L
+    var currentTimeStamp2 = 0L
     var oldSensorValue: Float = 0.0f;
     internal lateinit var ProximitySensor: TextView
     internal lateinit var data: TextView
     internal lateinit var mySensorManager: SensorManager
     internal var myProximitySensor: Sensor? = null
+
+    private var currentRunnable: Runnable? = null
 
     internal var proximitySensorEventListener: SensorEventListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
@@ -30,25 +33,57 @@ class MainActivity() : AppCompatActivity(), Parcelable {
         }
 
 
-
         override fun onSensorChanged(event: SensorEvent) {
             if (event.sensor.type == Sensor.TYPE_PROXIMITY) {
-                Log.d("distance", event.values[0].toString())
-                Log.d("oldDistance", oldSensorValue.toFloat().toString())
+
                 if (event.values[0] <= 10 && event.values[0] != oldSensorValue.toFloat()) {
-                    if(event.values[0] != 0.0f){
+
+                    if (event.values[0] != 0.0f) {
                         oldSensorValue = event.values[0]
                     }
-                    val currentTimeStamp = Date().time
-                    //Log.d("d", "timestamp: "+(currentTimeStamp - timeStamp  ).toString())
-                    if( (currentTimeStamp- timeStamp ) <= 1000){
-                        Log.d("débugAnthoTéléphoneMaison", "ca marche ?")
-                        data.text = "Précédent"
-                    }else {
-                        Log.d("débugAnthoTéléphoneMaison", "c2a marche 2?")
-                        data.text = "Suivant"
+
+                    if (currentTimeStamp != 0L) {
+                        currentTimeStamp2 = Date().time
                     }
-                    timeStamp =  currentTimeStamp;
+
+                 //   Log.d("timer", currentTimeStamp2.toString() + " :: :: :: ::" + currentTimeStamp.toString())
+
+
+                    currentTimeStamp = Date().time
+
+
+                    if(currentRunnable ===  null) {
+                        currentRunnable = Runnable {
+                            runOnUiThread {
+                                // ce code sera exécuté sur le thread principal
+                                // donc safe pour modifier label
+
+                                //Log.d("timer", currentTimeStamp2.toString() + " :: :: :: ::" + currentTimeStamp.toString())
+                                if ((currentTimeStamp2 - currentTimeStamp) <= 1000 && currentTimeStamp2 != 0L) {
+                                    data.text = "Précédent"
+                                } else {
+                                    data.text = "Suivant"
+                                }
+
+                                currentRunnable = null
+                                currentTimeStamp = 0L
+                                currentTimeStamp2 = 0L
+                            }
+                        }
+                        Handler().postDelayed(currentRunnable, 2000)
+                    }
+
+
+
+
+
+
+                    //  if( (currentTimeStamp- timeStamp ) <= 1000){
+                    //      data.text = "Précédent"
+                    //  }else {
+                    //      data.text = "Suivant"
+                    //    }
+                    //timeStamp = currentTimeStamp;
                 }
 
             }
